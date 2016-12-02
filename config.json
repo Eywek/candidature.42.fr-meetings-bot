@@ -1,0 +1,20 @@
+{
+  "credentials": {
+    "email": "",
+    "password": ""
+  },
+  "dates": [
+    "04 fév. 2017 14:30"
+  ],
+  "notifications": {
+    "SMS": {
+      "enabled": false,
+      "service": {
+        "freeAPI": {
+          "user": "",
+          "pass": ""
+        }
+      }
+    }
+  }
+}

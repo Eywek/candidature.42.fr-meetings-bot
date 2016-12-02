@@ -1,0 +1,16 @@
+{
+  "name": "candidature.42.fr-bot",
+  "version": "1.0.0",
+  "description": "A bot for candidature.42.fr meetings",
+  "main": "index.js",
+  "dependencies": {
+    "jsdom": "^9.8.3",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eywek <contact@eywek.fr>",
+  "license": "ISC"
+}
