@@ -7,6 +7,8 @@ var fs = require('fs')
 var startTime = Date.now()
 console.info('Init')
 
+var meetingsCount = 0
+
 // get config
 var config = fs.readFileSync('./config.json')
 config = JSON.parse(config.toString())
@@ -52,8 +54,16 @@ request.get('https://candidature.42.fr/users/sign_in', {jar: cookies}, function 
         jsdom.env(body, ["http://code.jquery.com/jquery.js"], function (err, window) {
           if (err) return console.error(err)
 
+          // vars
           var results = {}
           var available = false
+
+          // new meetings
+          var requestMeetingsCount = window.$('table#index_meetings tbody').find('tr').length
+          if (meetingsCount !== 0 && meetingsCount !== requestMeetingsCount) // table columns are more
+            available = true // new meetings
+          meetingsCount = requestMeetingsCount // update meetings count
+          results.meetingsCount = meetingsCount
 
           // for each configured dates, check if it's available
           for (var i = 0; i < config.dates.length; i++) {
@@ -62,7 +72,7 @@ request.get('https://candidature.42.fr/users/sign_in', {jar: cookies}, function 
             var availabilityElement = window.$(tr.find('td')[1])
             var availability = availabilityElement.html().trim()
 
-            if (availability !== 'Plus de place') { // not available
+            if (availability == 'Plus de place') { // not available
               results[config.dates[i]] = false
             } else {
               results[config.dates[i]] = availability
