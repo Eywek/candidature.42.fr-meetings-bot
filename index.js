@@ -17,11 +17,11 @@ function debug(msg) {
 }
 
 // init
-var startTime = Date.now()
 debug('Init')
 
 cron.schedule('*/5 * * * *', function() { // run script each 5minutes
   debug('Check...')
+  var startTime = Date.now()
 
   // cookies
   var cookies = request.jar()
